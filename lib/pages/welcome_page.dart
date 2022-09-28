@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/tools/colors/colors.dart';
 
 import '../widgets/app_large_text.dart';
 import '../widgets/app_text.dart';
+import '../widgets/responsive_button.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -25,17 +27,17 @@ class _WelcomePageState extends State<WelcomePage> {
           itemCount: images.length,
           itemBuilder: ((context, index) {
             return Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/imges/${images[index]}'),
-                      fit: BoxFit.cover),
-                ),
-                child: Container(
-                    margin:
-                        const EdgeInsets.only(top: 150, left: 20, right: 20),
-                    child: Row(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/imges/${images[index]}'),
+                    fit: BoxFit.cover),
+              ),
+              child: Container(
+                  margin: const EdgeInsets.only(top: 150, left: 20, right: 20),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,17 +47,39 @@ class _WelcomePageState extends State<WelcomePage> {
                               text: 'Mountain',
                               size: 30,
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Container(
-                              width: 250,
-                              child: const AppTextWidget(
+                                width: 250,
+                                child: AppTextWidget(
                                   text:
                                       'Mountain hikes give you an incredible sense of freedom along with endurance tests',
-                                  color: Colors.grey),
+                                  color: Appcolors.textColor2,
+                                  size: 14,
+                                )),
+                            const SizedBox(height: 40),
+                            const ResponsiveButton(
+                              width: 120,
                             )
                           ],
+                        ),
+                        Column(
+                          children: List.generate(3, (indexDots) {
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 2),
+                              width: 8,
+                              height: index == indexDots ? 25 : 8,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: index == indexDots
+                                      ? Appcolors.mainColor
+                                      : Appcolors.mainColor.withOpacity(0.3)),
+                            );
+                          }),
                         )
-                      ],
-                    )));
+                      ])),
+            );
           })),
     );
   }
